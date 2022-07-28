@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:converterPack="clr-namespace:Xamarin.Forms.ConvertersPack;assembly=Xamarin.Forms.ConvertersPack" 
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LB_Chopp.Views.FecharReservaPage"
+             BackgroundColor="{StaticResource preto_lb}"
+             Title="FECHAR RESERVA">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converterPack:CurrencyConverter x:Key="CurrencyConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="SALVAR"
+                     Priority="0"
+                     Order="Primary"
+                     Command="{Binding SalvarCommand}"/>
+        <ToolbarItem Text="LIMPAR"
+                     Order="Secondary"
+                     Command="{Binding CancelarCommand}"/>
+    </ContentPage.ToolbarItems>
+    <Frame HasShadow="True"
+           BackgroundColor="{StaticResource colorFundoForm}"
+           CornerRadius="5"
+           Margin="5"
+           Padding="0"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="FillAndExpand">
+        <Grid RowDefinitions="*,Auto,*"
+              RowSpacing="3">
+            <Grid RowDefinitions="*,*">
+                <StackLayout Orientation="Vertical">
+                    <Label Text="CHOPEIRAS"
+                           FontSize="Subtitle"
+                           TextColor="{StaticResource colorFundoForm}"
+                           BackgroundColor="{StaticResource laranja_lb}"
+                           FontAttributes="Bold"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Start"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"/>
+                    <CollectionView x:Name="cvChopeiras"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
+                                    SelectionMode="Single"
+                                    Margin="5,0,5,0"
+                                    ItemsSource="{Binding Chopeiras}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="{StaticResource laranja_lb}"
+                                       BackgroundColor="{StaticResource colorWhiteF3}"
+                                       CornerRadius="5"
+                                       HasShadow="True"
+                                       Padding="5">
+                                    <Grid VerticalOptions="StartAndExpand"
+                                          HorizontalOptions="FillAndExpand"
+                                          ColumnDefinitions="*,*,40">
+                                        <Label FontSize="Caption"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="Start"
+                                               VerticalTextAlignment="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Voltagem - "
+                                                          TextColor="{StaticResource colorGray6F}"/>
+                                                    <Span Text="{Binding Voltagemstr}"
+                                                          TextColor="{StaticResource preto_lb}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label FontSize="Caption"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalTextAlignment="Center"
+                                               Grid.Column="1">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Torneiras - "
+                                                          TextColor="{StaticResource colorGray6F}"/>
+                                                    <Span Text="{Binding Qt_torneiras}"
+                                                          TextColor="{StaticResource preto_lb}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <ImageButton Source="lixeira.png"
+                                                     Margin="5,5,5,5"
+                                                     WidthRequest="35"
+                                                     HeightRequest="35"
+                                                     Aspect="AspectFit"
+                                                     Grid.Column="2"
+                                                     Command="{Binding Source={x:Reference cvChopeiras}, Path=BindingContext.ExcluirChopeiraCommand}"
+                                                     CommandParameter="{Binding .}">
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="Scale"
+                                                                    Value="1" />
+                                                            <Setter Property="BackgroundColor"
+                                                                    Value="Transparent"/>
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Pressed">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="Scale"
+                                                                    Value="0.8" />
+                                                            <Setter Property="BackgroundColor"
+                                                                    Value="{StaticResource Key=laranja_lb}"/>
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+                                        </ImageButton>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+                <StackLayout Orientation="Vertical"
+                             Grid.Row="1">
+                    <Label Text="BARRIS"
+                       FontSize="Subtitle"
+                       TextColor="{StaticResource colorFundoForm}"
+                       BackgroundColor="{StaticResource laranja_lb}"
+                       FontAttributes="Bold"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Start"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+                    <CollectionView x:Name="cvBarris"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand"
+                                      SelectionMode="Single"
+                                      Margin="5,0,5,0"
+                                      ItemsSource="{Binding Barris}">
+                        
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="{StaticResource laranja_lb}"
+                                       BackgroundColor="{StaticResource colorWhiteF3}"
+                                       CornerRadius="5"
+                                       HasShadow="True"
+                                       Padding="5">
+                                    <Grid VerticalOptions="StartAndExpand"
+                                          HorizontalOptions="FillAndExpand"
+                                          ColumnDefinitions="*,40">
+                                        <Label TextColor="{StaticResource preto_lb}"
+                                               FontSize="Caption"
+                                               HorizontalOptions="Center"
+                                               HorizontalTextAlignment="Start"
+                                               VerticalTextAlignment="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Ds_produto}"/>
+                                                    <Span Text=" - "/>
+                                                    <Span Text="{Binding Volume}"/>
+                                                    <Span Text="LT  "/>
+                                                    <Span Text="{Binding Valor, StringFormat='{0:C}'}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <ImageButton Source="lixeira.png"
+                                                     Margin="5,5,5,5"
+                                                     WidthRequest="35"
+                                                     HeightRequest="35"
+                                                     Aspect="AspectFit"
+                                                     Grid.Column="1"
+                                                     Command="{Binding Source={x:Reference cvBarris}, Path=BindingContext.ExcluirBarrilCommand}"
+                                                     CommandParameter="{Binding .}">
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="Scale"
+                                                                    Value="1" />
+                                                            <Setter Property="BackgroundColor"
+                                                                    Value="Transparent"/>
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Pressed">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="Scale"
+                                                                    Value="0.8" />
+                                                            <Setter Property="BackgroundColor"
+                                                                    Value="{StaticResource Key=laranja_lb}"/>
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+                                        </ImageButton>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Grid>
+            <Frame HasShadow="True"
+                   BackgroundColor="{StaticResource colorFundoForm}"
+                   CornerRadius="5"
+                   Margin="5"
+                   Padding="0"
+                   Grid.Row="1"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand">
+                <Grid ColumnDefinitions="*,*,*,*"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand">
+                    <Entry HorizontalOptions="FillAndExpand"
+                           Placeholder="Cilindros"
+                           Keyboard="Numeric"
+                           Visual="Material"
+                           FontSize="Caption"
+                           FontAttributes="Bold"
+                           BackgroundColor="{StaticResource colorFundoForm}"
+                           Text="{Binding Reserva.QtCilindros}"/>
+                    <StackLayout Orientation="Vertical"
+                                 Grid.Column="1">
+                        <Label Text="Total"
+                               TextColor="{StaticResource colorGray6F}"
+                               FontSize="Caption"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Start"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"/>
+                        <Label Text="{Binding Total, StringFormat='{0:C}'}"
+                               TextColor="{StaticResource preto_lb}"
+                               FontSize="Caption"
+                               HorizontalOptions="Center"
+                               VerticalOptions="End"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                    <Entry HorizontalOptions="FillAndExpand"
+                           Placeholder="Desconto"
+                           Keyboard="Numeric"
+                           Visual="Material"
+                           Grid.Column="2"
+                           FontSize="Caption"
+                           FontAttributes="Bold"
+                           BackgroundColor="{StaticResource colorFundoForm}"
+                           Text="{Binding Desconto, Converter={StaticResource CurrencyConverter}}"/>
+                    <Entry HorizontalOptions="FillAndExpand"
+                           Placeholder="Taxa"
+                           Keyboard="Numeric"
+                           Visual="Material"
+                           Grid.Column="3"
+                           FontSize="Caption"
+                           FontAttributes="Bold"
+                           BackgroundColor="{StaticResource colorFundoForm}"
+                           Text="{Binding Taxa, Converter={StaticResource CurrencyConverter}}"/>
+                </Grid>
+            </Frame>
+            <StackLayout Orientation="Vertical"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand"
+                         Grid.Row="2">
+                <Label Text="DADOS CLIENTE"
+                       FontSize="Subtitle"
+                       TextColor="{StaticResource colorFundoForm}"
+                       BackgroundColor="{StaticResource laranja_lb}"
+                       FontAttributes="Bold"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Start"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+                <ScrollView>
+                    <StackLayout Orientation="Vertical">
+                        <Grid HorizontalOptions="FillAndExpand"
+                              ColumnDefinitions="*,40">
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BuscarClienteCommand}"/>
+                                </StackLayout.GestureRecognizers>
+                                <Entry x:Name="txtCliente"
+                                   TextColor="{StaticResource Key=preto_lb}"
+                                   InputTransparent="True"
+                                   Placeholder="Cliente"
+                                   HorizontalOptions="FillAndExpand"
+                                   IsReadOnly="True"
+                                   Text="{Binding Cliente.Nm_clifor}"/>
+                            </StackLayout>
+                            <ImageButton Source="x.png"
+                                         Margin="5,5,5,5"
+                                         WidthRequest="35"
+                                         HeightRequest="35"
+                                         Aspect="AspectFit"
+                                         Grid.Column="1"
+                                         Command="{Binding LimparCliente}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="1" />
+                                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="0.8" />
+                                                <Setter Property="BackgroundColor" Value="{StaticResource Key=laranja_lb}"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </ImageButton>
+                        </Grid>
+                        <Entry Placeholder="Rua"
+                               HorizontalOptions="FillAndExpand"
+                               TextTransform="Uppercase"
+                               Visual="Material"
+                               BackgroundColor="{StaticResource colorFundoForm}"
+                               Text="{Binding Reserva.Logradouro_ent}"/>
+                        <Grid ColumnDefinitions="120,*">
+                            <Entry Placeholder="Numero"
+                                   HorizontalOptions="FillAndExpand"
+                                   TextTransform="Uppercase"
+                                   Visual="Material"
+                                   BackgroundColor="{StaticResource colorFundoForm}"
+                                   Text="{Binding Reserva.Numero_ent}"/>
+                            <Entry Placeholder="Bairro"
+                                   HorizontalOptions="FillAndExpand"
+                                   TextTransform="Uppercase"
+                                   Visual="Material"
+                                   Grid.Column="1"
+                                   BackgroundColor="{StaticResource colorFundoForm}"
+                                   Text="{Binding Reserva.Bairro_ent}"/>
+                        </Grid>
+                        <Entry Placeholder="Complemento"
+                               HorizontalOptions="FillAndExpand"
+                               TextTransform="Uppercase"
+                               Visual="Material"
+                               BackgroundColor="{StaticResource colorFundoForm}"
+                               Text="{Binding Reserva.Complemento_ent}"/>
+                        <Entry Placeholder="Próximo"
+                               HorizontalOptions="FillAndExpand"
+                               TextTransform="Uppercase"
+                               Visual="Material"
+                               BackgroundColor="{StaticResource colorFundoForm}"
+                               Text="{Binding Reserva.Proximo_ent}"/>
+                        <Editor x:Name="txtObs"
+                                Text="{Binding Reserva.Obs}"
+                                Placeholder="Observação"
+                                Visual="Material"
+                                AutoSize="TextChanges"
+                                MaxLength="255"
+                                BackgroundColor="{StaticResource colorFundoForm}"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                            <Editor.Keyboard>
+                                <Keyboard x:FactoryMethod="Create">
+                                    <x:Arguments>
+                                        <KeyboardFlags>Suggestions,CapitalizeSentence</KeyboardFlags>
+                                    </x:Arguments>
+                                </Keyboard>
+                            </Editor.Keyboard>
+                        </Editor>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentPage>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LB_Chopp.Views.ChopeiraPage"
+             BackgroundColor="{StaticResource preto_lb}"
+             Title="CHOPEIRAS DISPONIVEIS">
+    <Frame HasShadow="True"
+           BackgroundColor="{StaticResource colorFundoForm}"
+           CornerRadius="5"
+           Margin="5"
+           Padding="0"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="Start">
+        <CollectionView x:Name="cvChopeira"
+                        Margin="5"
+                        Grid.Row="1"
+                        ItemsSource="{Binding Chopeiras}"
+                        SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 HorizontalItemSpacing="5"
+                                 VerticalItemSpacing="5"
+                                 Span="4"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="{StaticResource Key=laranja_lb}"
+                           CornerRadius="5"
+                           HasShadow="True"
+                           Padding="5">
+                        <Button Text="{Binding Nr_chopeira}"
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                HorizontalOptions="Fill"
+                                VerticalOptions="Fill"
+                                BackgroundColor="{StaticResource colorFundoForm}"
+                                Command="{Binding Source={x:Reference cvChopeira}, Path=BindingContext.ChopeiraCommand}"
+                                CommandParameter="{Binding .}"/>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Frame>
+</ContentPage>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LB_Chopp.Views.ProrrogarColetaPage"
+             BackgroundColor="{StaticResource preto_lb}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="SALVAR" 
+                     Command="{Binding SalvarCommand}"/>
+    </ContentPage.ToolbarItems>
+    <Frame HasShadow="True"
+           BackgroundColor="{StaticResource colorFundoForm}"
+           CornerRadius="5"
+           Margin="5"
+           Padding="0"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="Center">
+            <StackLayout Orientation="Vertical">
+            <Label Text="PRORROGAR COLETA"
+                   Margin="0,0,0,10"
+                   FontSize="Subtitle"
+                   TextColor="{StaticResource colorFundoForm}"
+                   BackgroundColor="{StaticResource laranja_lb}"
+                   FontAttributes="Bold"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Start"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"/>
+            <Label Text="Nova Coleta"
+                       TextColor="{StaticResource colorGray6F}"
+                       FontSize="Caption"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center"/>
+                <DatePicker Format="dd/MM/yyyy"
+                            FontSize="Caption"
+                            HorizontalOptions="FillAndExpand"
+                            Date="{Binding Reserva.Dt_prevretorno}"/>
+            <Label Text="Motivo Prorrogar"
+                       TextColor="{StaticResource colorGray6F}"
+                       FontSize="Caption"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center"/>
+            <Editor Text="{Binding Reserva.Motivo}"
+                        MaxLength="1024"
+                        AutoSize="TextChanges"
+                        IsSpellCheckEnabled="True"
+                        IsTextPredictionEnabled="True"
+                        TextTransform="Uppercase"
+                        TextColor="{StaticResource preto_lb}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Start"
+                        BackgroundColor="{StaticResource colorFundoForm}"/>
+        </StackLayout>
+    </Frame>
+</ContentPage>

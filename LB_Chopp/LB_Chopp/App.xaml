@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             x:Class="LB_Chopp.App">
+    <Application.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="FontPoppinsRegular" />
+            <Setter Property="TextColor" Value="#272727" />
+        </Style>
+
+        <Color x:Key="preto_lb">#1a1a1c</Color>
+        <Color x:Key="laranja_lb">#F08B29</Color>
+        <Color x:Key="colorGray6F">#6F6F6F</Color>
+        <Color x:Key="colorWhiteF3">#F3F8FC</Color>
+        <Color x:Key="colorBlack20">#202020</Color>
+        <Color x:Key="colorAlterado">#F8C471</Color>
+        <Color x:Key="colorFundoCabSwuip">#E5E8E8</Color>
+        <Color x:Key="colorFundoForm">#FFFFFF</Color>
+
+        <Font x:Key="sansation_bold">san</Font>
+
+        <Style x:Key="FABPrimary" TargetType="Button">
+            <Setter Property="CornerRadius" Value="100"/>
+            <Setter Property="BackgroundColor" Value="#F08B29"/>
+            <Setter Property="HeightRequest" Value="55"/>
+            <Setter Property="WidthRequest" Value="55"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="15,15,15,15"/>
+        </Style>
+    </Application.Resources>
+</prism:PrismApplication>

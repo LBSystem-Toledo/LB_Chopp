@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LB_Chopp.Views.NovaReservaPage"
+             BackgroundColor="{StaticResource preto_lb}"
+             Title="NOVA RESERVA">
+    <Frame HasShadow="True"
+           BackgroundColor="{StaticResource colorFundoForm}"
+           CornerRadius="5"
+           Margin="5"
+           Padding="0"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="FillAndExpand">
+        <Grid RowDefinitions="Auto,*,Auto,*,Auto"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+            <Frame HasShadow="True"
+                   BackgroundColor="{StaticResource colorFundoCabSwuip}"
+                   CornerRadius="5"
+                   Margin="5"
+                   Padding="3"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand">
+                <Grid ColumnDefinitions="*,*">
+                    <StackLayout Orientation="Vertical"
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="FillAndExpand">
+                        <Label Text="Reserva"
+                               TextColor="{StaticResource colorGray6F}"
+                               FontSize="Caption"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Start"
+                               VerticalTextAlignment="Center"/>
+                        <DatePicker Format="dd/MM/yyyy"
+                                    FontSize="Caption"
+                                    HorizontalOptions="FillAndExpand"
+                                    Date="{Binding Dt_ini}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical"
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="FillAndExpand"
+                                 Grid.Column="1">
+                        <Label Text="Coleta"
+                               TextColor="{StaticResource colorGray6F}"
+                               FontSize="Caption"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Start"
+                               VerticalTextAlignment="Center"/>
+                        <DatePicker Format="dd/MM/yyyy"
+                                    FontSize="Caption"
+                                    HorizontalOptions="FillAndExpand"
+                                    Date="{Binding Dt_fin}"/>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+            <Frame HasShadow="True"
+                   BackgroundColor="{StaticResource colorFundoForm}"
+                   CornerRadius="5"
+                   Margin="5"
+                   Padding="3"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   Grid.Row="1">
+                <CollectionView x:Name="cvChopeira"
+                                Margin="5"
+                                ItemsSource="{Binding ChopeirasDisponiveis}"
+                                SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         HorizontalItemSpacing="5"
+                                         VerticalItemSpacing="5"
+                                         Span="2"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="{StaticResource laranja_lb}"
+                                   BackgroundColor="{StaticResource colorWhiteF3}"
+                                   CornerRadius="5"
+                                   HasShadow="True"
+                                   Padding="5">
+                                <StackLayout Orientation="Vertical">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference cvChopeira}, Path=BindingContext.AdicionarChopeiraCommand}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </StackLayout.GestureRecognizers>
+                                    <Grid ColumnDefinitions="*,*">
+                                        <StackLayout Orientation="Vertical"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     VerticalOptions="FillAndExpand">
+                                            <Label Text="Voltagem"
+                                                   TextColor="{StaticResource colorGray6F}"
+                                                   FontSize="Caption"
+                                                   FontAttributes="Bold"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Start"
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Voltagemstr}"
+                                                   TextColor="{StaticResource preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="End"
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     VerticalOptions="FillAndExpand"
+                                                     Grid.Column="1">
+                                            <Label Text="Torneira"
+                                                   TextColor="{StaticResource colorGray6F}"
+                                                   FontSize="Caption"
+                                                   FontAttributes="Bold"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Start"
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Qt_torneiras}"
+                                                   TextColor="{StaticResource preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="End"
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                    </Grid>
+                                    <Label Text="{Binding Disponivel}"
+                                           TextColor="{StaticResource preto_lb}"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="End"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Disponivel: "
+                                                      FontSize="Caption"/>
+                                                <Span Text="{Binding Disponivel}"
+                                                      FontSize="Subtitle"
+                                                      FontAttributes="Bold"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
+            <Frame HasShadow="True"
+                   BackgroundColor="{StaticResource colorFundoCabSwuip}"
+                   CornerRadius="5"
+                   Margin="5"
+                   Padding="3"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   Grid.Row="2">
+                <Picker x:Name="pkChopp"
+                        Title="Selecione CHOPP"
+                        FontSize="16"
+                        Visual="Material"
+                        BackgroundColor="{StaticResource colorFundoCabSwuip}"
+                        HorizontalOptions="FillAndExpand"
+                        ItemsSource="{Binding Chopp}"
+                        ItemDisplayBinding="{Binding Ds_produto}"
+                        SelectedItem="{Binding Chopcorrente}"/>
+            </Frame>
+            <Frame HasShadow="True"
+                   BackgroundColor="{StaticResource colorFundoForm}"
+                   CornerRadius="5"
+                   Margin="5"
+                   Padding="3"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   Grid.Row="3">
+                <CollectionView x:Name="cvBarril"
+                                Margin="5"
+                                ItemsSource="{Binding Barris}"
+                                SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         HorizontalItemSpacing="5"
+                                         VerticalItemSpacing="5"
+                                         Span="3"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="{StaticResource laranja_lb}"
+                                   BackgroundColor="{Binding CorBotao}"
+                                   CornerRadius="5"
+                                   HasShadow="True"
+                                   Padding="5">
+                                <StackLayout Orientation="Vertical"
+                                             HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="FillAndExpand">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference cvBarril}, Path=BindingContext.AdicionarBarrilCommand}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </StackLayout.GestureRecognizers>
+                                    <Label TextColor="{StaticResource preto_lb}"
+                                           FontAttributes="Bold"
+                                           FontSize="Caption"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="End"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Volume}"/>
+                                                <Span Text="L - "/>
+                                                <Span Text="{Binding Ds_tipo}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="{Binding Cheio}"
+                                           TextColor="{StaticResource preto_lb}"
+                                           FontSize="Caption"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="End"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Cheio}"/>
+                                                <Span Text=" - "/>
+                                                <Span Text="{Binding PrecoBarril, StringFormat='{0:C}'}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
+            <Button Text="VER CARRINHO"
+                    ImageSource="carrinhoitem.png"
+                    CornerRadius="10"
+                    Margin="2"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Visual="Material"
+                    IsVisible="{Binding VisibleCarrinho}"
+                    Grid.Row="4"
+                    Command="{Binding VerCarrinhoCommand}"/>
+        </Grid>
+    </Frame>
+</ContentPage>

@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:dxc="http://schemas.devexpress.com/xamarin/2014/forms/collectionview"  
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LB_Chopp.Views.ExpedirPage"
+             BackgroundColor="{StaticResource preto_lb}"
+             Title="EXPEDIR">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="SALVAR" 
+                     Command="{Binding SalvarCommand}"/>
+    </ContentPage.ToolbarItems>
+    <Frame HasShadow="True"
+           BackgroundColor="{StaticResource colorFundoForm}"
+           CornerRadius="5"
+           Margin="5"
+           Padding="0"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="Start">
+        <Grid RowDefinitions="*,*,*"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical">
+                <Label Text="CHOPEIRAS EXPEDIR"
+                       FontSize="Subtitle"
+                       TextColor="{StaticResource colorFundoForm}"
+                       BackgroundColor="{StaticResource laranja_lb}"
+                       FontAttributes="Bold"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Start"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+                <dxc:DXCollectionView x:Name="cvChopeiras"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand"
+                                      SelectionMode="Single"
+                                      Margin="5,0,5,0"
+                                      ItemsSource="{Binding Chopeiras}">
+                    <dxc:DXCollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <pv:PancakeView VerticalOptions="StartAndExpand"
+                                            HorizontalOptions="FillAndExpand"
+                                            BackgroundColor="{StaticResource colorFundoForm}"
+                                            Padding="0,0,0,5">
+                                <Grid VerticalOptions="StartAndExpand"
+                                      HorizontalOptions="FillAndExpand"
+                                      ColumnDefinitions="Auto,*">
+                                    <BoxView BackgroundColor="{StaticResource laranja_lb}"
+                                             WidthRequest="3"
+                                             HorizontalOptions="Start"
+                                             VerticalOptions="FillAndExpand"/>
+                                    <Grid HorizontalOptions="FillAndExpand"
+                                              Grid.Column="1"
+                                              ColumnDefinitions="*,*,*,40">
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text="Nº Chopeira"
+                                                   TextColor="{StaticResource colorGray6F}"
+                                                   FontSize="Caption"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Nr_chopeira}"
+                                                   TextColor="{StaticResource preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical"
+                                                     Grid.Column="1">
+                                            <Label Text="Voltagem"
+                                                   TextColor="{StaticResource colorGray6F}"
+                                                   FontSize="Caption"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Voltagemstr}"
+                                                   TextColor="{StaticResource preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical"
+                                                     Grid.Column="2">
+                                            <Label Text="Torneira"
+                                                   TextColor="{StaticResource colorGray6F}"
+                                                   FontSize="Caption"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Qt_torneiras}"
+                                                   TextColor="{StaticResource preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <ImageButton x:Name="btnConfirma"
+                                                     Source="confirmar.png"
+                                                     BackgroundColor="Transparent"
+                                                     Aspect="AspectFill"
+                                                     Grid.Column="3"
+                                                     Command="{Binding Source={x:Reference cvChopeiras}, Path=BindingContext.ExpedirChopeiraCommand}"
+                                                     CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                </Grid>
+                            </pv:PancakeView>
+                        </DataTemplate>
+                    </dxc:DXCollectionView.ItemTemplate>
+                </dxc:DXCollectionView>
+            </StackLayout>
+            <StackLayout Orientation="Vertical"
+                         Grid.Row="1">
+                <Label Text="BARRIS EXPEDIR"
+                       FontSize="Subtitle"
+                       TextColor="{StaticResource colorFundoForm}"
+                       BackgroundColor="{StaticResource laranja_lb}"
+                       FontAttributes="Bold"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Start"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+                <dxc:DXCollectionView x:Name="cvBarris"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand"
+                                      SelectionMode="Single"
+                                      Margin="5,0,5,0"
+                                      ItemsSource="{Binding Barris}">
+                    <dxc:DXCollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <pv:PancakeView VerticalOptions="StartAndExpand"
+                                            HorizontalOptions="FillAndExpand"
+                                            BackgroundColor="{StaticResource colorFundoForm}"
+                                            Padding="0,0,0,5">
+                                <Grid VerticalOptions="StartAndExpand"
+                                      HorizontalOptions="FillAndExpand"
+                                      ColumnDefinitions="Auto,*">
+                                    <BoxView BackgroundColor="{StaticResource laranja_lb}"
+                                             WidthRequest="3"
+                                             HorizontalOptions="Start"
+                                             VerticalOptions="FillAndExpand"/>
+                                    <Grid HorizontalOptions="FillAndExpand"
+                                          Grid.Column="1"
+                                          RowDefinitions="Auto,Auto"
+                                          ColumnDefinitions="*,*,*,40">
+                                        <Label Text="{Binding Ds_produto}"
+                                               TextColor="{StaticResource preto_lb}"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="FillAndExpand"
+                                               VerticalOptions="Center"
+                                               HorizontalTextAlignment="Start"
+                                               Grid.ColumnSpan="4"/>
+                                        <StackLayout Orientation="Vertical"
+                                                     Grid.Row="1">
+                                            <Label Text="Nº Barril"
+                                                   TextColor="{StaticResource colorGray6F}"
+                                                   FontSize="Caption"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Nr_barril}"
+                                                   TextColor="{StaticResource preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical"
+                                                     Grid.Row="1"
+                                                     Grid.Column="1">
+                                            <Label Text="Volume"
+                                                   TextColor="{StaticResource colorGray6F}"
+                                                   FontSize="Caption"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Volume}"
+                                                   TextColor="{StaticResource preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical"
+                                                     Grid.Row="1"
+                                                     Grid.Column="2">
+                                            <Label Text="Tipo"
+                                                   TextColor="{StaticResource colorGray6F}"
+                                                   FontSize="Caption"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Ds_tipo}"
+                                                   TextColor="{StaticResource preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <ImageButton x:Name="btnConfirma"
+                                                     Source="confirmar.png"
+                                                     BackgroundColor="Transparent"
+                                                     Aspect="AspectFill"
+                                                     Grid.Row="1"
+                                                     Grid.Column="3"
+                                                     Command="{Binding Source={x:Reference cvChopeiras}, Path=BindingContext.ExpedirBarrilCommand}"
+                                                     CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                </Grid>
+                            </pv:PancakeView>
+                        </DataTemplate>
+                    </dxc:DXCollectionView.ItemTemplate>
+                </dxc:DXCollectionView>
+            </StackLayout>
+            <StackLayout Orientation="Vertical"
+                         Grid.Row="2">
+                <Label Text="CILINDROS EXPEDIR"
+                       FontSize="Subtitle"
+                       TextColor="{StaticResource colorFundoForm}"
+                       BackgroundColor="{StaticResource laranja_lb}"
+                       FontAttributes="Bold"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Start"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+                <dxc:DXCollectionView x:Name="cvCilindros"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand"
+                                      SelectionMode="Single"
+                                      Margin="5,0,5,0"
+                                      ItemsSource="{Binding Cilindros}">
+                    <dxc:DXCollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <pv:PancakeView VerticalOptions="StartAndExpand"
+                                            HorizontalOptions="FillAndExpand"
+                                            BackgroundColor="{StaticResource colorFundoForm}"
+                                            Padding="0,0,0,5">
+                                <Grid VerticalOptions="StartAndExpand"
+                                      HorizontalOptions="FillAndExpand"
+                                      ColumnDefinitions="Auto,*">
+                                    <BoxView BackgroundColor="{StaticResource laranja_lb}"
+                                             WidthRequest="3"
+                                             HorizontalOptions="Start"
+                                             VerticalOptions="FillAndExpand"/>
+                                    <Grid HorizontalOptions="FillAndExpand"
+                                              Grid.Column="1"
+                                              ColumnDefinitions="*,40">
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text="Nº Cilindro"
+                                                   TextColor="{StaticResource colorGray6F}"
+                                                   FontSize="Caption"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Nr_cilindro}"
+                                                   TextColor="{StaticResource preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <ImageButton x:Name="btnConfirma"
+                                                     Source="confirmar.png"
+                                                     BackgroundColor="Transparent"
+                                                     Aspect="AspectFill"
+                                                     Grid.Column="1"
+                                                     Command="{Binding Source={x:Reference cvChopeiras}, Path=BindingContext.ExpedirCilindroCommand}"
+                                                     CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                </Grid>
+                            </pv:PancakeView>
+                        </DataTemplate>
+                    </dxc:DXCollectionView.ItemTemplate>
+                </dxc:DXCollectionView>
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentPage>

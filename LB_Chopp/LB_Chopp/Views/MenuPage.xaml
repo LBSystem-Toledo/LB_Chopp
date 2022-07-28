@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:prism="http://prismlibrary.com"
+                  prism:ViewModelLocator.AutowireViewModel="True"
+                  x:Class="LB_Chopp.Views.MenuPage"
+                  BackgroundColor="{StaticResource preto_lb}">
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu"
+                     Padding="0">
+            <ContentPage.Content>
+                <StackLayout>
+                    <Grid BackgroundColor="{StaticResource preto_lb}"
+                          ColumnDefinitions="50,*"
+                          RowDefinitions="80,Auto">
+                        <Image Source="icone_Transparente.png"
+                               Aspect="AspectFit"
+                               Margin="10,0,0,0"/>
+                        <Label Grid.Column="1"
+                               Text="LB CHOPP"
+                               TextColor="White"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
+                               FontSize="Title"
+                               FontFamily="SANSATION_BOLD"/>
+                        <Label Grid.Row="1"
+                               Grid.ColumnSpan="2"
+                               Margin="0,0,20,0"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Bem vindo - "
+                                          TextColor="{StaticResource colorFundoForm}"
+                                          FontSize="Title"
+                                          FontFamily="SANSATION_LIGHT_ITALIC"/>
+                                    <Span Text="{Binding Login}"
+                                          TextColor="{StaticResource laranja_lb}"
+                                          FontSize="Title"
+                                          FontFamily="SANSATION_BOLD"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                    <TableView Intent="Menu">
+                        <TableSection>
+                            <ViewCell>
+                                <StackLayout HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="FillAndExpand"
+                                             BackgroundColor="{StaticResource colorFundoForm}">
+                                    <Button BackgroundColor="{StaticResource colorFundoForm}"
+                                            TextColor="{StaticResource preto_lb}"
+                                            Text="RESERVA"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill"
+                                            Visual="Material"
+                                            Command="{Binding ReservaCommand}"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="FillAndExpand"
+                                             BackgroundColor="{StaticResource colorFundoForm}">
+                                    <Button BackgroundColor="{StaticResource colorFundoForm}"
+                                            TextColor="{StaticResource preto_lb}"
+                                            Text="EXPEDIÇÃO"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill"
+                                            Visual="Material"
+                                            Command="{Binding ExpedicaoCommand}"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="FillAndExpand"
+                                             BackgroundColor="{StaticResource colorFundoForm}">
+                                    <Button BackgroundColor="{StaticResource colorFundoForm}"
+                                            TextColor="{StaticResource preto_lb}"
+                                            Text="COLETA"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill"
+                                            Visual="Material"
+                                            Command="{Binding ColetaCommand}"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout HorizontalOptions="FillAndExpand"
+                                             VerticalOptions="FillAndExpand"
+                                             BackgroundColor="{StaticResource colorFundoForm}">
+                                    <Button BackgroundColor="{StaticResource colorFundoForm}"
+                                            TextColor="{StaticResource preto_lb}"
+                                            Text="SAIR"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill"
+                                            Visual="Material"
+                                            Command="{Binding SairCommand}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                    </TableView>
+                </StackLayout>
+            </ContentPage.Content>
+        </ContentPage>
+    </MasterDetailPage.Master>
+</MasterDetailPage>

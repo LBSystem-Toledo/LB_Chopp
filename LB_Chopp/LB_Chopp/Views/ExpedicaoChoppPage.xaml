@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:dxc="http://schemas.devexpress.com/xamarin/2014/forms/collectionview"  
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:behaviorPack="clr-namespace:Xamarin.Forms.BehaviorValidationPack;assembly=Xamarin.Forms.BehaviorValidationPack"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LB_Chopp.Views.ExpedicaoChoppPage"
+             BackgroundColor="{StaticResource preto_lb}"
+             Title="EXPEDIÇÃO CHOPP">
+    <Frame HasShadow="True"
+           BackgroundColor="{StaticResource colorFundoForm}"
+           CornerRadius="5"
+           Margin="5"
+           Padding="0"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="Start">
+        <Grid RowDefinitions="Auto,*">
+            <Frame HasShadow="True"
+                   BackgroundColor="{StaticResource colorFundoForm}"
+                   Margin="5"
+                   Padding="5,0,5,0"
+                   CornerRadius="5">
+                <StackLayout Orientation="Vertical">
+                    <Grid HorizontalOptions="FillAndExpand"
+                                      ColumnDefinitions="*,40">
+                        <StackLayout HorizontalOptions="FillAndExpand">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BuscarClienteCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                            <Entry x:Name="txtCliente"
+                                   TextColor="{StaticResource Key=preto_lb}"
+                                   InputTransparent="True"
+                                   Placeholder="Cliente"
+                                   HorizontalOptions="FillAndExpand"
+                                   IsReadOnly="True"
+                                   Text="{Binding Cliente.Nm_clifor}"/>
+                        </StackLayout>
+                        <ImageButton Source="x.png"
+                                    Margin="5,5,5,5"
+                                    WidthRequest="35"
+                                    HeightRequest="35"
+                                    Aspect="AspectFit"
+                                    Grid.Column="1"
+                                    Command="{Binding LimparCliente}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="1" />
+                                            <Setter Property="BackgroundColor" Value="Transparent"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="0.8" />
+                                            <Setter Property="BackgroundColor" Value="{StaticResource Key=laranja_lb}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ImageButton>
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand"
+                          ColumnDefinitions="80,*,*,40">
+                        <Entry x:Name="txtReserva"
+                               Text="{Binding Id_reserva}"
+                               TextColor="{StaticResource preto_lb}"
+                               FontSize="Caption"
+                               BackgroundColor="{StaticResource colorFundoForm}"
+                               Placeholder="Reserva"
+                               HorizontalOptions="FillAndExpand"
+                               Visual="Material"
+                               Keyboard="Numeric"/>
+                        <Entry Placeholder="Dt Ini"
+                               FontSize="Caption"
+                               Grid.Column="1"
+                               Visual="Material"
+                               Keyboard="Numeric"
+                               BackgroundColor="{StaticResource colorFundoForm}"
+                               Text="{Binding Dt_ini}">
+                            <Entry.Behaviors>
+                                <behaviorPack:MaskedBehavior Mask="XX/XX/XXXX"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Entry Placeholder="Dt Fim"
+                               FontSize="Caption"
+                               Grid.Column="2"
+                               Visual="Material"
+                               Keyboard="Numeric"
+                               BackgroundColor="{StaticResource colorFundoForm}"
+                               Text="{Binding Dt_fin}">
+                            <Entry.Behaviors>
+                                <behaviorPack:MaskedBehavior Mask="XX/XX/XXXX"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <ImageButton Source="lupa.png"
+                                     Margin="5,5,5,5"
+                                     WidthRequest="35"
+                                     HeightRequest="35"
+                                     Aspect="AspectFit"
+                                     Grid.Column="3"
+                                     Command="{Binding BuscarReservasCommand}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale"
+                                                    Value="1" />
+                                            <Setter Property="BackgroundColor"
+                                                    Value="Transparent"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale"
+                                                    Value="0.8" />
+                                            <Setter Property="BackgroundColor"
+                                                    Value="{StaticResource Key=laranja_lb}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ImageButton>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+            <dxc:DXCollectionView x:Name="cvReservas"
+                                  HorizontalOptions="FillAndExpand"
+                                  VerticalOptions="FillAndExpand"
+                                  SelectionMode="Single"
+                                  Margin="5,0,5,0"
+                                  Grid.Row="1"
+                                  ItemsSource="{Binding Reservas}">
+                <dxc:DXCollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <pv:PancakeView VerticalOptions="StartAndExpand"
+                                        HorizontalOptions="FillAndExpand"
+                                        BackgroundColor="{StaticResource colorFundoForm}"
+                                        Padding="0,0,0,5">
+                            <Grid VerticalOptions="StartAndExpand"
+                                  HorizontalOptions="FillAndExpand"
+                                  ColumnDefinitions="Auto,*">
+                                <BoxView BackgroundColor="{StaticResource laranja_lb}"
+                                         WidthRequest="3"
+                                         HorizontalOptions="Start"
+                                         VerticalOptions="FillAndExpand"/>
+                                <SwipeView Grid.Column="1">
+                                    <SwipeView.LeftItems>
+                                        <SwipeItems>
+                                            <SwipeItemView Command="{Binding Source={x:Reference cvReservas}, Path=BindingContext.AnexarFotoCommand}"
+                                                           CommandParameter="{Binding .}">
+                                                <StackLayout Orientation="Vertical"
+                                                             Margin="5"
+                                                             Padding="10"
+                                                             HorizontalOptions="FillAndExpand"
+                                                             VerticalOptions="FillAndExpand">
+                                                    <Image Source="foto.png"
+                                                           Aspect="AspectFit"
+                                                           HorizontalOptions="FillAndExpand"
+                                                           VerticalOptions="Center"/>
+                                                    <Label Text="ANEXAR"
+                                                           TextColor="{StaticResource preto_lb}"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="FillAndExpand"
+                                                           VerticalOptions="Center"
+                                                           HorizontalTextAlignment="Center"/>
+                                                </StackLayout>
+                                            </SwipeItemView>
+                                        </SwipeItems>
+                                    </SwipeView.LeftItems>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItemView Command="{Binding Source={x:Reference cvReservas}, Path=BindingContext.ExpedirCommand}"
+                                                           CommandParameter="{Binding .}">
+                                                <StackLayout Orientation="Vertical"
+                                                             Margin="5"
+                                                             Padding="10"
+                                                             HorizontalOptions="FillAndExpand"
+                                                             VerticalOptions="FillAndExpand">
+                                                    <Image Source="checklist.png"
+                                                           Aspect="AspectFit"
+                                                           HorizontalOptions="FillAndExpand"
+                                                           VerticalOptions="Center"/>
+                                                    <Label Text="EXPEDIR"
+                                                           TextColor="{StaticResource preto_lb}"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="FillAndExpand"
+                                                           VerticalOptions="Center"
+                                                           HorizontalTextAlignment="Center"/>
+                                                </StackLayout>
+                                            </SwipeItemView>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Grid HorizontalOptions="FillAndExpand"
+                                          ColumnDefinitions="Auto,*"
+                                          RowDefinitions="Auto,Auto,Auto">
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text="Nº Reserva"
+                                                   TextColor="{StaticResource colorGray6F}"
+                                                   FontSize="Caption"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Id_reserva}"
+                                                   TextColor="{StaticResource preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical"
+                                                     Grid.Column="1">
+                                            <Label Text="Cliente"
+                                                   TextColor="{StaticResource colorGray6F}"
+                                                   FontSize="Caption"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Nm_clifor}"
+                                                   TextColor="{StaticResource preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical"
+                                                     Grid.Row="1"
+                                                     Grid.ColumnSpan="2">
+                                            <Label Text="Endereço"
+                                                   TextColor="{StaticResource colorGray6F}"
+                                                   FontSize="Caption"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label TextColor="{StaticResource preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Logradouro_ent}"/>
+                                                        <Span Text=", "/>
+                                                        <Span Text="{Binding Numero_ent}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                        <Grid ColumnDefinitions="*,*"
+                                              Grid.Row="2"
+                                              Grid.ColumnSpan="2">
+                                            <StackLayout Orientation="Vertical">
+                                                <Label Text="Data Reserva"
+                                                       TextColor="{StaticResource colorGray6F}"
+                                                       FontSize="Caption"
+                                                       FontAttributes="Bold"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding Dt_reserva, StringFormat='{0:dd/MM/yyyy}'}"
+                                                       TextColor="{StaticResource preto_lb}"
+                                                       FontSize="Caption"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Vertical"
+                                                         Grid.Column="1">
+                                                <Label Text="Prev. Coleta"
+                                                       TextColor="{StaticResource colorGray6F}"
+                                                       FontSize="Caption"
+                                                       FontAttributes="Bold"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding Dt_prevretorno, StringFormat='{0:dd/MM/yyyy}'}"
+                                                       TextColor="{StaticResource preto_lb}"
+                                                       FontSize="Caption"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </Grid>
+                                </SwipeView>
+                            </Grid>
+                        </pv:PancakeView>
+                    </DataTemplate>
+                </dxc:DXCollectionView.ItemTemplate>
+                <dxc:DXCollectionView.GroupDescription>
+                    <dxc:GroupDescription FieldName="Bairro_ent"/>
+                </dxc:DXCollectionView.GroupDescription>
+                <dxc:DXCollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Frame HasShadow="True"
+                               BackgroundColor="{StaticResource laranja_lb}"
+                               CornerRadius="5"
+                               Margin="2"
+                               Padding="0">
+                            <StackLayout>
+                                <Label Text="{Binding Value}"
+                                       FontSize="Subtitle"
+                                       TextColor="{StaticResource colorFundoForm}"
+                                       HorizontalOptions="FillAndExpand"
+                                       HorizontalTextAlignment="Center"
+                                       FontAttributes="Bold"/>
+                                <BoxView BackgroundColor="AliceBlue"
+                                         HeightRequest="1"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </dxc:DXCollectionView.GroupHeaderTemplate>
+            </dxc:DXCollectionView>
+        </Grid>
+    </Frame>
+</ContentPage>
