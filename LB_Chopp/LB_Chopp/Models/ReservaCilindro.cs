@@ -7,6 +7,7 @@ namespace LB_Chopp.Models
 {
     public class ReservaCilindro: BindableBase
     {
+        public int ID { get; set; }
         string _cd_empresa = string.Empty;
         public string Cd_empresa { get { return _cd_empresa; } set { SetProperty(ref _cd_empresa, value); } }
         int _id_reserva;

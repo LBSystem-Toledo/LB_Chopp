@@ -6,6 +6,7 @@ namespace LB_Chopp.Models
 {
     public class ChopeiraDisponivel
     {
+        public int ID { get; set; }
         public string Voltagem { get; set; } = string.Empty;
         public string Voltagemstr
         {

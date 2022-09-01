@@ -5,6 +5,7 @@ namespace LB_Chopp.Models
 {
     public class BarrisTipo: BindableBase
     {
+        public int ID { get; set; }
         int _id_volume;
         public int Id_volume { get{ return _id_volume;} set { SetProperty(ref _id_volume, value); } }
         int _id_tipo;

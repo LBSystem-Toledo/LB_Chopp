@@ -14,12 +14,23 @@ namespace LB_Chopp
     public partial class App
     {
         #if (DEBUG)
-            //public const string url_api = "http://192.168.1.107:45455";
-            public const string url_api = "http://cloud.lbsystemsoftware.com.br:33209/chopp";
+            public const string url_api = "http://192.168.1.105:45455";
+        //public const string url_api = "http://cloud.lbsystemsoftware.com.br:33209/chopp";
         #else
             public const string url_api = "http://cloud.lbsystemsoftware.com.br:33209/chopp";
             //public const string url_api = "http://192.168.1.11:45455";
         #endif
+
+        static AcessoDB database;
+        public static AcessoDB Database
+        {
+            get
+            {
+                if (database == null)
+                    database = new AcessoDB(Xamarin.Essentials.FileSystem.AppDataDirectory);
+                return database;
+            }
+        }
 
         public static TokenVendedor config { get; set; }
 
